@@ -1,7 +1,9 @@
 import { auth } from "@clerk/nextjs/server";
+import Link from "next/link";
 import { redirect } from "next/navigation";
 
-import { Button } from "@/components/ui/button";
+import { buttonVariants } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 
 export default async function Home() {
   const { userId } = await auth();
@@ -25,16 +27,15 @@ export default async function Home() {
             share links that are simple to remember.
           </p>
           <div className="flex flex-col items-center justify-center gap-3 sm:flex-row">
-            <form action="/sign-up">
-              <Button size="lg" type="submit">
-                Get Started for Free
-              </Button>
-            </form>
-            <form action="/sign-in">
-              <Button variant="outline" size="lg" type="submit">
-                Sign In
-              </Button>
-            </form>
+            <Link href="/sign-up" className={cn(buttonVariants({ size: "lg" }))}>
+              Get Started for Free
+            </Link>
+            <Link
+              href="/sign-in"
+              className={cn(buttonVariants({ variant: "outline", size: "lg" }))}
+            >
+              Sign In
+            </Link>
           </div>
         </section>
 
