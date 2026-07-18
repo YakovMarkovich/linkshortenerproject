@@ -10,8 +10,8 @@ export default function Header() {
     <header className="flex items-center justify-end gap-4 px-6 py-4 border-b">
       {!isSignedIn ? (
         <>
-          <SignInButton />
-          <SignUpButton />
+          <SignInButton mode="modal" />
+          <SignUpButton mode="modal" />
         </>
       ) : (
         <UserButton />

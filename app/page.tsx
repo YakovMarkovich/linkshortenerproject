@@ -1,14 +1,29 @@
-import { auth } from "@clerk/nextjs/server";
+"use client";
+
+import { useAuth } from "@clerk/nextjs";
 import Link from "next/link";
 import { redirect } from "next/navigation";
+import { useEffect } from "react";
 
 import { buttonVariants } from "@/components/ui/button";
 
-export default async function Home() {
-  const { userId } = await auth();
+export default function Home() {
+  const { userId, isLoaded } = useAuth();
 
-  if (userId) {
-    redirect("/dashboard");
+  useEffect(() => {
+    if (isLoaded && userId) {
+      redirect("/dashboard");
+    }
+  }, [isLoaded, userId]);
+
+  if (!isLoaded) {
+    return (
+      <main className="flex flex-1 items-center justify-center px-6 py-20">
+        <div className="text-center">
+          <p className="text-muted-foreground">Loading...</p>
+        </div>
+      </main>
+    );
   }
 
   return (
@@ -29,12 +44,6 @@ export default async function Home() {
             <Link href="/sign-up" className={buttonVariants({ size: "lg" })}>
               Get Started for Free
             </Link>
-            <Link
-              href="/sign-in"
-              className={buttonVariants({ variant: "outline", size: "lg" })}
-            >
-              Sign In
-            </Link>
           </div>
         </section>
 
@@ -49,8 +58,8 @@ export default async function Home() {
           <article className="rounded-lg border bg-card p-6">
             <h2 className="text-lg font-semibold">Centralized Dashboard</h2>
             <p className="mt-2 text-sm text-muted-foreground">
-              Manage and review your links from one place with a simple,
-              focused workspace.
+              Manage and review your links from one place with a simple, focused
+              workspace.
             </p>
           </article>
           <article className="rounded-lg border bg-card p-6">
