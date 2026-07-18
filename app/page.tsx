@@ -3,7 +3,6 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 
 import { buttonVariants } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
 
 export default async function Home() {
   const { userId } = await auth();
@@ -27,12 +26,12 @@ export default async function Home() {
             share links that are simple to remember.
           </p>
           <div className="flex flex-col items-center justify-center gap-3 sm:flex-row">
-            <Link href="/sign-up" className={cn(buttonVariants({ size: "lg" }))}>
+            <Link href="/sign-up" className={buttonVariants({ size: "lg" })}>
               Get Started for Free
             </Link>
             <Link
               href="/sign-in"
-              className={cn(buttonVariants({ variant: "outline", size: "lg" }))}
+              className={buttonVariants({ variant: "outline", size: "lg" })}
             >
               Sign In
             </Link>
