@@ -1,3 +1,7 @@
+---
+description: Read this before implementing or modifying authentication in this project.
+---
+
 # Authentication Guidelines
 
 All authentication in this application is handled exclusively by **Clerk**. No alternative authentication methods are permitted.
